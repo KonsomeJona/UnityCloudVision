@@ -220,7 +220,7 @@ public class WebCamTextureToCloudVision : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
 
 	private IEnumerator Capture() {
@@ -269,26 +269,15 @@ public class WebCamTextureToCloudVision : MonoBehaviour {
 			yield return www;
 
 			if (www.error == null) {
+				Debug.Log(www.text.Replace("\n", "").Replace(" ", ""));
+
 				AnnotateImageResponses responses = JsonUtility.FromJson<AnnotateImageResponses>(www.text);
 				// SendMessage, BroadcastMessage or someting like that.
-				Sample_OnAnnotateImageResponses(responses);
+
 			} else {
-				
+				Debug.Log("Error: " + www.error);
 			}
 
 		}
 	}
-
-	/// <summary>
-	/// A sample implementation.
-	/// </summary>
-	void Sample_OnAnnotateImageResponses(AnnotateImageResponses responses) {
-		if (responses.responses.Count > 0) {
-			if (responses.responses[0].faceAnnotations != null && responses.responses[0].faceAnnotations.Count > 0) {
-				GameObject.Find("Text").GetComponent<UnityEngine.UI.Text>().text =
-					"joyLikelihood\n" + responses.responses[0].faceAnnotations[0].joyLikelihood;
-			}
-		}
-	}
-		
 }
