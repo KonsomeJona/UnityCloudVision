@@ -279,6 +279,9 @@ public class WebCamTextureToCloudVision : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// A sample implementation.
+	/// </summary>
 	void Sample_OnAnnotateImageResponses(AnnotateImageResponses responses) {
 		if (responses.responses.Count > 0) {
 			if (responses.responses[0].faceAnnotations != null && responses.responses[0].faceAnnotations.Count > 0) {

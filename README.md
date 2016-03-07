@@ -1,12 +1,12 @@
 # UnityCloudVision
 
-A [Google Cloud Vision API](https://cloud.google.com/vision/) client for [Unity](http://unity3d.com)
+This is a [Google Cloud Vision API](https://cloud.google.com/vision/) client for [Unity](http://unity3d.com)
 
-# Requirements
+## Requirements
 
-A valid 'Browser key' of Google Cloud Vision API is required. See the instructions: [Getting Started](https://cloud.google.com/vision/docs/getting-started)
+A 'Browser key' of Google Cloud Vision API is required. See the instructions: [Getting Started](https://cloud.google.com/vision/docs/getting-started)
 
-#License
+## License
 
 Copyright (c) 2016 Akihiro Komori 
 
