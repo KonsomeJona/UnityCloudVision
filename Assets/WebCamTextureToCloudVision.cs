@@ -273,11 +273,22 @@ public class WebCamTextureToCloudVision : MonoBehaviour {
 
 				AnnotateImageResponses responses = JsonUtility.FromJson<AnnotateImageResponses>(www.text);
 				// SendMessage, BroadcastMessage or someting like that.
-
+				Sample_OnAnnotateImageResponses(responses);
 			} else {
 				Debug.Log("Error: " + www.error);
 			}
 
+		}
+	}
+
+	/// <summary>
+	/// A sample implementation.
+	/// </summary>
+	void Sample_OnAnnotateImageResponses(AnnotateImageResponses responses) {
+		if (responses.responses.Count > 0) {
+			if (responses.responses[0].faceAnnotations != null && responses.responses[0].faceAnnotations.Count > 0) {
+				Debug.Log("joyLikelihood: " + responses.responses[0].faceAnnotations[0].joyLikelihood);
+			}
 		}
 	}
 }
