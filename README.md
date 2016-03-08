@@ -4,7 +4,7 @@ This is a [Google Cloud Vision API](https://cloud.google.com/vision/) client for
 
 ## Requirements
 
-A 'Browser key' of Google Cloud Vision API is required. See the instructions: [Getting Started](https://cloud.google.com/vision/docs/getting-started)
+A 'Server API key' or a 'Brower API key (with no referrer)' of Google Cloud Vision API is required. See the instructions: [Getting Started](https://cloud.google.com/vision/docs/getting-started)
 
 ## License
 
