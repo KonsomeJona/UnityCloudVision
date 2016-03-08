@@ -239,15 +239,15 @@ public class WebCamTextureToCloudVision : MonoBehaviour {
 
 			texture2D.SetPixels(pixels);
 			// texture2D.Apply(false); // Not required. Because we do not need to be uploaded it to GPU
-			byte[] bytes = texture2D.EncodeToJPG();
-			string base64str = System.Convert.ToBase64String(bytes);
-		
+			byte[] jpg = texture2D.EncodeToJPG();
+			string base64 = System.Convert.ToBase64String(jpg);
+	
 			AnnotateImageRequests requests = new AnnotateImageRequests();
 			requests.requests = new List<AnnotateImageRequest>();
 
 			AnnotateImageRequest request = new AnnotateImageRequest();
 			request.image = new Image();
-			request.image.content = base64str;
+			request.image.content = base64;
 			request.features = new List<Feature>();
 
 			Feature feature = new Feature();
