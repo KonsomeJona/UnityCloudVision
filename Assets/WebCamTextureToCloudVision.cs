@@ -14,6 +14,7 @@ public class WebCamTextureToCloudVision : MonoBehaviour {
 
 	WebCamTexture webcamTexture;
 	Texture2D texture2D;
+	Dictionary<string, string> headers;
 
 	[System.Serializable]
 	public class AnnotateImageRequests {
@@ -196,6 +197,8 @@ public class WebCamTextureToCloudVision : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		headers = new Dictionary<string, string>();
+		headers.Add("Content-Type", "application/json; charset=UTF-8");
 
 		if (apiKey == null || apiKey == "")
 			Debug.LogError("No API key. Please set your API key into the \"Web Cam Texture To Cloud Vision(Script)\" component.");
@@ -259,25 +262,21 @@ public class WebCamTextureToCloudVision : MonoBehaviour {
 			requests.requests.Add(request);
 
 			string jsonData = JsonUtility.ToJson(requests, false);
-
-			string url = this.url + this.apiKey;
-			Dictionary<string, string> header = new Dictionary<string, string>();
-			header.Add("Content-Type", "application/json; charset=UTF-8");
-			byte[] postData = System.Text.Encoding.Default.GetBytes(jsonData);
-
-			WWW www = new WWW(url, postData, header);
-			yield return www;
-
-			if (www.error == null) {
-				Debug.Log(www.text.Replace("\n", "").Replace(" ", ""));
-
-				AnnotateImageResponses responses = JsonUtility.FromJson<AnnotateImageResponses>(www.text);
-				// SendMessage, BroadcastMessage or someting like that.
-				Sample_OnAnnotateImageResponses(responses);
-			} else {
-				Debug.Log("Error: " + www.error);
+			if (jsonData != string.Empty) {
+				string url = this.url + this.apiKey;
+				byte[] postData = System.Text.Encoding.Default.GetBytes(jsonData);
+				using(WWW www = new WWW(url, postData, headers)) {
+					yield return www;
+					if (www.error == null) {
+						Debug.Log(www.text.Replace("\n", "").Replace(" ", ""));
+						AnnotateImageResponses responses = JsonUtility.FromJson<AnnotateImageResponses>(www.text);
+						// SendMessage, BroadcastMessage or someting like that.
+						Sample_OnAnnotateImageResponses(responses);
+					} else {
+						Debug.Log("Error: " + www.error);
+					}
+				}
 			}
-
 		}
 	}
 
