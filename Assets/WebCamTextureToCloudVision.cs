@@ -244,7 +244,10 @@ public class WebCamTextureToCloudVision : MonoBehaviour {
 			// texture2D.Apply(false); // Not required. Because we do not need to be uploaded it to GPU
 			byte[] jpg = texture2D.EncodeToJPG();
 			string base64 = System.Convert.ToBase64String(jpg);
-	
+#if UNITY_WEBGL	
+			Application.ExternalCall("post", this.gameObject.name, "OnSuccessFromBrowser", "OnErrorFromBrowser", this.url + this.apiKey, base64, this.featureType.ToString(), this.maxResults);
+#else
+			
 			AnnotateImageRequests requests = new AnnotateImageRequests();
 			requests.requests = new List<AnnotateImageRequest>();
 
@@ -277,8 +280,21 @@ public class WebCamTextureToCloudVision : MonoBehaviour {
 					}
 				}
 			}
+#endif
 		}
 	}
+
+#if UNITY_WEBGL
+	void OnSuccessFromBrowser(string jsonString) {
+		Debug.Log(jsonString);	
+		AnnotateImageResponses responses = JsonUtility.FromJson<AnnotateImageResponses>(jsonString);
+		Sample_OnAnnotateImageResponses(responses);
+	}
+
+	void OnErrorFromBrowser(string jsonString) {
+		Debug.Log(jsonString);	
+	}
+#endif
 
 	/// <summary>
 	/// A sample implementation.

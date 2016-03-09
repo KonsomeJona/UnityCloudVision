@@ -6,6 +6,10 @@ This is a [Google Cloud Vision API](https://cloud.google.com/vision/) client for
 
 A 'Server API key' or a 'Brower API key (with no referrer)' of Google Cloud Vision API is required. See the instructions: [Getting Started](https://cloud.google.com/vision/docs/getting-started)
 
+## Note
+
+If you want to build a WebGL version, please choose the 'CloudVision' as WebGL Template.
+
 ## License
 
 Copyright (c) 2016 Akihiro Komori 
