@@ -270,7 +270,7 @@ public class WebCamTextureToCloudVision : MonoBehaviour {
 				byte[] postData = System.Text.Encoding.Default.GetBytes(jsonData);
 				using(WWW www = new WWW(url, postData, headers)) {
 					yield return www;
-					if (www.error == null) {
+					if (string.IsNullOrEmpty(www.error)) {
 						Debug.Log(www.text.Replace("\n", "").Replace(" ", ""));
 						AnnotateImageResponses responses = JsonUtility.FromJson<AnnotateImageResponses>(www.text);
 						// SendMessage, BroadcastMessage or someting like that.
